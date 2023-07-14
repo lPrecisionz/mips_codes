@@ -1,0 +1,34 @@
+.data 
+	msg1: .asciiz "digite um numero\n"
+	msg2: .asciiz "o numero eh par\n"
+	msg3: .asciiz "o numero eh impar\n"
+	
+
+.text
+
+	.macro printar_msg(%str)
+		li $v0, 4
+		la $a0, %str
+		syscall
+	.end_macro 
+	printar_msg(msg1)
+	
+	li $v0, 5
+	syscall 
+	add $t1, $v0, $zero
+	
+	rem $t2, $t1, 2
+	
+	beq $t2, 0, if
+	j else
+	
+	if:
+	printar_msg(msg2)
+	j end
+	
+	else:
+	printar_msg(msg3)
+	
+	end:
+	
+	
